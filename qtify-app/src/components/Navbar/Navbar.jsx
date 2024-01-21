@@ -6,7 +6,7 @@ import Searchbar from '../Searchbar/Searchbar'
 
 function Navbar() {
     return(<nav className={styles.navbar}>
-        <Logo />
+        <a href='/'><Logo /></a>
         <Searchbar/>
         <Button>Give Feedback</Button>
     </nav>)
