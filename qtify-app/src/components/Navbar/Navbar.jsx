@@ -8,7 +8,7 @@ function Navbar() {
     return(<nav className={styles.navbar}>
         <Logo />
         <Searchbar/>
-        <Button text="Give Feedback"/>
+        <Button>Give Feedback</Button>
     </nav>)
 }
 

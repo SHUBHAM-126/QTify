@@ -15,6 +15,11 @@
     flex:1;
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
+    font-family: 'Lato', sans-serif;
+    color:var(--color-dark);
+}
+.searchbar input::placeholder{
+    color:var(--color-dark);
 }
 .searchbar button{
     border:0;
