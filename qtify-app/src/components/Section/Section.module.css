@@ -1,0 +1,36 @@
+.section{
+    max-width: 1920px;
+    margin:0 auto;
+    padding:0 30px;
+}
+.title_container{
+    display: flex;
+    justify-content: space-between;
+    gap:10px;
+    margin-bottom:24px;
+}
+.title{
+    color:var(--color-white);
+    font-size:20px;
+}
+.button{
+    color: var(--color-primary);
+    background: rgba(0,0,0,0);
+    padding: 0;
+    border:0;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.cards{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap:24px;
+}
+.collapsed > *:nth-child(n + 9){
+    display: none;
+}
+.loading{
+    color:#fff;
+}

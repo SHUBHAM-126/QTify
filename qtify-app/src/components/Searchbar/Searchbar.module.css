@@ -17,6 +17,7 @@
     border-bottom-left-radius: 8px;
     font-family: 'Lato', sans-serif;
     color:var(--color-dark);
+    outline: 0;
 }
 .searchbar input::placeholder{
     color:var(--color-dark);

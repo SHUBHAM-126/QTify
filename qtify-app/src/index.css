@@ -21,6 +21,7 @@
 html,
 body {
   height: 100%;
+  background: var(--color-dark);
 }
 body {
   line-height: 1.5;
@@ -52,4 +53,7 @@ h6 {
 #root,
 #__next {
   isolation: isolate;
+}
+a{
+  text-decoration: none;
 }
