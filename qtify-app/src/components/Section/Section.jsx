@@ -6,7 +6,7 @@ import Card from '../../components/Card/Card'
 function Section({title, collapse, endpoint}) {
 
     const [data, setData] = useState([])
-    const [collapsed, setCollapsed] = useState(false)
+    const [collapsed, setCollapsed] = useState(true)
 
     useEffect(()=> {
 

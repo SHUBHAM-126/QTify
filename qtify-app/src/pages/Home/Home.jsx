@@ -13,6 +13,7 @@ function Home() {
         <div>
             <Hero />
             <Section title="Top Albums" endpoint="https://qtify-backend-labs.crio.do/albums/top" collapse />
+            <Section title="New Albums" endpoint="https://qtify-backend-labs.crio.do/albums/new" collapse />
         </div>
     )
 }
