@@ -6,12 +6,13 @@ import Card from '../../components/Card/Card'
 function Section({title, collapse, endpoint}) {
 
     const [data, setData] = useState([])
-    const [collapsed, setCollapsed] = useState(true)
+    const [collapsed, setCollapsed] = useState(false)
 
     useEffect(()=> {
 
         const fetching = async () => {
             const response = await axios.get(endpoint);
+            console.log(response.data)
             setData(response.data)
         }
 
