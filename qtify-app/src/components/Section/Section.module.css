@@ -25,13 +25,12 @@
 }
 .cards{
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
     gap:24px;
 }
-.collapsed > *:nth-child(n + 9){
-    display: none;
-}
 .loading{
     color:#fff;
+    display: flex;
+    align-items: center;
+    gap:10px;
 }

@@ -22,6 +22,7 @@ html,
 body {
   height: 100%;
   background: var(--color-dark);
+  color: var(--color-white);
 }
 body {
   line-height: 1.5;

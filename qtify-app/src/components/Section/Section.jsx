@@ -1,41 +1,53 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styles from './Section.module.css'
-import axios from 'axios'
 import Card from '../../components/Card/Card'
+import useFetch from '../../hooks/useFetch'
+import CircularProgress from '@mui/material/CircularProgress';
+import Carousel from '../Carousel/Carousel';
 
-function Section({title, collapse, endpoint}) {
+function Section({ title, collapse, path }) {
 
-    const [data, setData] = useState([])
     const [collapsed, setCollapsed] = useState(true)
 
-    useEffect(()=> {
-
-        const fetching = async () => {
-            const response = await axios.get(endpoint);
-            console.log(response.data)
-            setData(response.data)
-        }
-
-        fetching()
-
-    }, [])
+    const { data, err, loading } = useFetch(path)
 
     const handleCollapse = () => {
         setCollapsed(!collapsed)
     }
 
-    return(
+    return (
         <section className={styles.section}>
             <div className={styles.title_container}>
                 <h3 className={styles.title}>{title}</h3>
-                {collapse && <button className={styles.button} onClick={handleCollapse}>{collapsed ? 'Show All' : 'Collapse' }</button>}
+                {collapse && <button className={styles.button} onClick={handleCollapse}>{collapsed ? 'Show All' : 'Collapse'}</button>}
             </div>
 
-            {data && (<div className={`${styles.cards} ${collapsed ? styles.collapsed : ''}`}>
-                {data.map(item => (
-                    <Card key={item.id} data={item} type="album" />
-                ))}
-            </div>)}
+            {!loading && !err && (
+                !collapsed ? (
+                    //GRID
+                    <div className={styles.cards}>
+                        {data.map(item => (
+                            <Card key={item.id} data={item} type="album" />
+                        ))}
+                    </div>
+                ) :
+                    //CAROUSEL
+                    (<Carousel>
+                        {data.map(item => (
+                            <Card key={item.id} data={item} type="album" />
+                        ))}
+                    </Carousel>)
+
+            )}
+
+            {/* LOADING */}
+            {loading && <div className={styles.loading}>
+                <span>Loading</span>
+                <CircularProgress/>
+                </div>}
+
+            {/* ERROR */}
+            {err && <div className={styles.loading}>Failed to load - {err}</div>}
 
         </section>
     )
