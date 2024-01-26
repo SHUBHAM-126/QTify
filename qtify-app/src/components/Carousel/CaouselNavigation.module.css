@@ -20,5 +20,5 @@
 }
 .prev[disabled],
 .next[disabled]{
-    visibility: hidden;
+    opacity: 0;
 }
