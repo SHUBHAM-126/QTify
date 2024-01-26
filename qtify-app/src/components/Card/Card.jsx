@@ -24,7 +24,7 @@ function Card({ data, type }) {
 
     return (
         <div className={styles.card}>
-            <div>
+            <div className={styles.banner}>
                 <img src={data.image} />
                 <Chip label={`${data.likes} Likes`} className={styles.chip} size="small" />
             </div>

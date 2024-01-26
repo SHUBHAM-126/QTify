@@ -1,15 +1,41 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './Section.module.css'
 import Card from '../../components/Card/Card'
 import useFetch from '../../hooks/useFetch'
 import CircularProgress from '@mui/material/CircularProgress';
 import Carousel from '../Carousel/Carousel';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 
-function Section({ title, collapse, path }) {
+function Section({ title, collapse, path, type, genres }) {
 
     const [collapsed, setCollapsed] = useState(true)
+    const { response : data } = useFetch(path)
+    const [response, setResponse] = useState(data)
 
-    const { data, err, loading } = useFetch(path)
+    useEffect(() => {
+        setResponse(data)
+    }, [data.loading])
+
+    //TAB INDEX
+    const [tabValue, setTabValue] = useState('all');
+
+    //HANDLE TAB CHANGE
+    const handleTabChange = (event, newValue) => {
+        setTabValue(newValue);
+        filterSongs(newValue)
+    };
+
+    const filterSongs = (filter) => {
+        if(filter == "all"){
+            setResponse(data)
+        }
+        else{
+            setResponse((prevState) => (
+                {...prevState, data : data.data.filter(item => item.genre.key == filter)}
+            ))
+        }
+    }
 
     const handleCollapse = () => {
         setCollapsed(!collapsed)
@@ -22,32 +48,41 @@ function Section({ title, collapse, path }) {
                 {collapse && <button className={styles.button} onClick={handleCollapse}>{collapsed ? 'Show All' : 'Collapse'}</button>}
             </div>
 
-            {!loading && !err && (
+            {genres && genres.data.data && (
+                <Tabs onChange={handleTabChange} value={tabValue} className={styles.filters}>
+                    <Tab label="All" value="all" />
+                    {genres.data.data.map((item, index) => (
+                        <Tab key={item.key} label={item.label} value={item.key} />
+                    ))}
+                </Tabs>
+            )}
+
+            {!response.loading && !response.err && (
                 !collapsed ? (
                     //GRID
                     <div className={styles.cards}>
-                        {data.map(item => (
-                            <Card key={item.id} data={item} type="album" />
+                        {response.data.map(item => (
+                            <Card key={item.id} data={item} type={type} />
                         ))}
                     </div>
                 ) :
                     //CAROUSEL
                     (<Carousel>
-                        {data.map(item => (
-                            <Card key={item.id} data={item} type="album" />
+                        {response.data.map(item => (
+                            <Card key={item.id} data={item} type={type} />
                         ))}
                     </Carousel>)
 
             )}
 
             {/* LOADING */}
-            {loading && <div className={styles.loading}>
+            {response.loading && <div className={styles.loading}>
                 <span>Loading</span>
-                <CircularProgress/>
-                </div>}
+                <CircularProgress />
+            </div>}
 
             {/* ERROR */}
-            {err && <div className={styles.loading}>Failed to load - {err}</div>}
+            {response.err && <div className={styles.loading}>Failed to load - {response.err}</div>}
 
         </section>
     )

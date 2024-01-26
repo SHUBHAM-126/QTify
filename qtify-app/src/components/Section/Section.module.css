@@ -8,7 +8,7 @@
     display: flex;
     justify-content: space-between;
     gap:10px;
-    margin-bottom:24px;
+    margin-bottom:12px;
 }
 .title{
     color:var(--color-white);
@@ -33,4 +33,17 @@
     display: flex;
     align-items: center;
     gap:10px;
+}
+
+.filters{
+    margin-bottom:16px;
+}
+.filters button{
+    color:var(--color-white);
+    font-family: var(--font-body);
+    text-transform: none;
+    font-size: 16px;
+    padding:8px 10px;
+    min-width: 70px;
+    font-weight: 600;
 }
