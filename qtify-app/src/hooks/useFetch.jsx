@@ -13,6 +13,7 @@ export default function useFetch(path){
             try{
                 setLoading(true)
                 const response = await axios.get(`${endpoint}${path}`)
+                // console.log(response)
                 setData(response.data)
                 setLoading(false)
             }
@@ -26,7 +27,7 @@ export default function useFetch(path){
 
         fetchData()
 
-    }, [])
+    }, [path])
 
     return {response: {data, loading, err}}
 }
